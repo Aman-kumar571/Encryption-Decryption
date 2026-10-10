@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>FileCrypt - Browser Tool</title>
+    <meta name="description" content="Encrypt and decrypt files directly in your browser. Client-side Web Crypto API. Nothing uploaded.">
+    <meta property="og:title" content="FileCrypt - Browser Tool">
+    <meta property="og:description" content="Encrypt and decrypt files directly in your browser. Client-side Web Crypto API. Nothing uploaded.">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#1a6b5a">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="site-nav">
+        <div class="container">
+            <a href="index.html" class="logo">FileCrypt</a>
+            <a href="tool.html">Browser Tool</a>
+            <a href="how-it-works.html">How It Works</a>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <h1>Encrypt or decrypt a file in your browser</h1>
+            <p>Everything runs locally. Your files and passwords are never uploaded.</p>
+
+            <div class="drop-zone" id="dropZone" tabindex="0" role="button" aria-label="Choose file or drag and drop">
+                <p>Drag and drop a file here, or click to select</p>
+                <input type="file" id="fileInput" class="hidden">
+            </div>
+
+            <div id="fileInfo" class="file-info hidden">
+                <strong>Selected:</strong> <span id="fileName"></span> (<span id="fileSize"></span>)
+            </div>
+
+            <div class="field-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" autocomplete="new-password">
+            </div>
+
+            <div class="field-group" id="confirmPasswordGroup">
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="password" id="confirmPassword" autocomplete="new-password">
+            </div>
+
+            <div class="checkbox-row">
+                <input type="checkbox" id="showPassword">
+                <label for="showPassword">Show password</label>
+            </div>
+
+            <div class="button-row">
+                <button type="button" id="encryptBtn" class="btn">Encrypt</button>
+                <button type="button" id="decryptBtn" class="btn btn-secondary">Decrypt</button>
+            </div>
+
+            <div class="progress-bar" id="progressBar">
+                <div class="progress-fill"></div>
+            </div>
+
+            <div class="status-log" id="statusLog" aria-live="polite">Ready.</div>
+
+            <p class="note">Note: For files larger than 100 MB, use the desktop app.</p>
+            <p class="note">If you lose your password, your data cannot be recovered.</p>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <span>FileCrypt</span>
+            <a href="privacy.html">Privacy</a>
+            <a href="terms.html">Terms</a>
+        </div>
+    </footer>
+
+    <script type="module" src="tool.js"></script>
+</body>
+</html>

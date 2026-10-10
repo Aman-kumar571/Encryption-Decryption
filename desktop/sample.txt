@@ -1,0 +1,1 @@
+Hello, FileCrypt! This is a test of the CLI mode.

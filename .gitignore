@@ -1,0 +1,11 @@
+# Build directories and binaries
+desktop/build/
+.dist/
+*.class
+
+# Operating System & IDE files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.iml

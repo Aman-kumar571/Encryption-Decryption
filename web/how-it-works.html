@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>FileCrypt - How It Works</title>
+    <meta name="description" content="Technical details, file format specification, and cryptographic architecture of FileCrypt.">
+    <meta property="og:title" content="FileCrypt - How It Works">
+    <meta property="og:description" content="Technical details, file format specification, and cryptographic architecture of FileCrypt.">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#1a6b5a">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="site-nav">
+        <div class="container">
+            <a href="index.html" class="logo">FileCrypt</a>
+            <a href="tool.html">Browser Tool</a>
+            <a href="how-it-works.html">How It Works</a>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <h1>How FileCrypt Works</h1>
+            <p>FileCrypt uses established, standardized cryptography to encrypt and authenticate files. The desktop app and browser tool share the exact same format and specifications.</p>
+
+            <h2>Encrypted File Layout (.fct)</h2>
+            <p>Every encrypted file begins with a 32-byte header followed by AES-GCM ciphertext with an appended authentication tag:</p>
+
+            <table class="spec-table">
+                <thead>
+                    <tr>
+                        <th>Offset</th>
+                        <th>Length</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>0 - 3</td>
+                        <td>4 bytes</td>
+                        <td>ASCII magic constant <code>FCT1</code></td>
+                    </tr>
+                    <tr>
+                        <td>4 - 19</td>
+                        <td>16 bytes</td>
+                        <td>Cryptographically random salt</td>
+                    </tr>
+                    <tr>
+                        <td>20 - 31</td>
+                        <td>12 bytes</td>
+                        <td>Initialization Vector (IV / Nonce)</td>
+                    </tr>
+                    <tr>
+                        <td>32+</td>
+                        <td>Remaining</td>
+                        <td>AES-256-GCM ciphertext + 16-byte authentication tag</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Key Derivation: PBKDF2-HMAC-SHA256</h2>
+            <p>Passwords are never used directly as encryption keys. Instead, FileCrypt derives a 256-bit symmetric key using PBKDF2 with HMAC-SHA256 and 600,000 iterations. This high iteration count slows down brute-force and dictionary attacks significantly.</p>
+            <p>A fresh 16-byte random salt is generated for each file. This ensures that encrypting identical files or using identical passwords produces different keys and ciphertexts.</p>
+
+            <h2>Authenticated Encryption: AES-256-GCM</h2>
+            <p>FileCrypt uses AES in Galois/Counter Mode (GCM). GCM provides both confidentiality (keeping data secret) and integrity (ensuring data has not been modified). At the end of encryption, a 16-byte authentication tag is computed and appended to the ciphertext.</p>
+
+            <h2>Authentication and Tamper Detection</h2>
+            <p>During decryption, AES-GCM verifies the authentication tag before releasing decrypted plaintext. If a wrong password is provided, or if even a single byte of the file has been altered, the tag verification fails. In both cases, FileCrypt reports:</p>
+            <pre><code>Wrong password, or the file is corrupted.</code></pre>
+            <p>No partial plaintext or internal error details are exposed.</p>
+
+            <h2>Cross-Platform Interoperability</h2>
+            <p>Because the format relies strictly on standard specifications (AES-GCM and PBKDF2), any file encrypted with the desktop Java application can be decrypted in the browser, and vice versa.</p>
+
+            <h2>Honest Limitations</h2>
+            <ul>
+                <li><strong>No password recovery:</strong> There are no backdoors or master keys. If the password is forgotten, the data cannot be decrypted.</li>
+                <li><strong>File metadata:</strong> Only file contents are encrypted. File names and file creation dates are not concealed by the encryption process.</li>
+                <li><strong>Browser memory boundaries:</strong> The browser tool operates entirely in memory using WebCrypto Blobs, making files larger than 100 MB impractical for browser decryption. Use the desktop application for large files.</li>
+                <li><strong>Educational project:</strong> FileCrypt has not been audited by third-party security researchers. It is intended for educational purposes.</li>
+            </ul>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <span>FileCrypt</span>
+            <a href="privacy.html">Privacy</a>
+            <a href="terms.html">Terms</a>
+        </div>
+    </footer>
+</body>
+</html>

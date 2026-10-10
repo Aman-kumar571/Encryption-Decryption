@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>FileCrypt - Encrypt files with a password</title>
+    <meta name="description" content="Encrypt and decrypt files with a password. Open-source desktop app and browser tool. Nothing leaves your device.">
+    <meta property="og:title" content="FileCrypt - Encrypt files with a password">
+    <meta property="og:description" content="Encrypt and decrypt files with a password. Open-source desktop app and browser tool. Nothing leaves your device.">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#1a6b5a">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="site-nav">
+        <div class="container">
+            <a href="index.html" class="logo">FileCrypt</a>
+            <a href="tool.html">Browser Tool</a>
+            <a href="how-it-works.html">How It Works</a>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <section class="hero">
+                <h1>Encrypt files with a password. Nothing leaves your device.</h1>
+                <p>FileCrypt uses AES-256-GCM encryption with PBKDF2 key derivation. Your files and passwords never leave your computer. Available as a desktop app or directly in your browser.</p>
+            </section>
+
+            <section class="section">
+                <h2>What it is</h2>
+                <p>FileCrypt is a file encryption tool. Pick a file, set a password, get an encrypted .fct file. To decrypt, use the same password. Works offline. No account needed. The desktop app and browser tool use the identical file format, so files encrypted in one can be decrypted in the other.</p>
+            </section>
+
+            <section class="section">
+                <h2>Download Desktop App</h2>
+                <div class="download-box">
+                    <p><strong>FileCrypt Desktop Application (Java)</strong></p>
+                    <p>Requires Java 17 or later. Run with <code>java -jar FileCrypt.jar</code></p>
+                    <p>SHA-256 Checksum: <code id="jar-checksum">e35762486904d95e06b6c3818e500dc8ccdf31839e9f1e253da5261bbf2e59fb</code></p>
+                    <p><a href="downloads/FileCrypt.jar" class="btn" download>Download FileCrypt.jar</a></p>
+                    <p class="note">Note: This is an educational project. It has not been audited by third parties.</p>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>How to use in 3 steps</h2>
+                <ol class="steps">
+                    <li>Choose a file (or drag and drop into the application).</li>
+                    <li>Enter a password (minimum 8 characters for encryption).</li>
+                    <li>Click Encrypt or Decrypt.</li>
+                </ol>
+                <p class="note">Important: If you lose your password, your data cannot be recovered.</p>
+            </section>
+
+            <section class="section">
+                <h2>Use in your browser</h2>
+                <p>No installation needed. The browser version uses the Web Crypto API locally on your device.</p>
+                <p><a href="tool.html" class="btn btn-secondary">Open Browser Tool</a></p>
+            </section>
+
+            <section class="section">
+                <h2>Source Code</h2>
+                <p>View the source code, implementation details, and documentation on GitHub: <a href="https://github.com/Aman-kumar571/Encryption-Decryption">GitHub Repository</a></p>
+            </section>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <span>FileCrypt</span>
+            <a href="privacy.html">Privacy</a>
+            <a href="terms.html">Terms</a>
+        </div>
+    </footer>
+</body>
+</html>
